@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <h1>{{ studentId ? 'Edit Student' : 'Add Student' }}</h1>
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+
+    <!-- Name Input -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input id="name" formControlName="name" type="text" class="form-control" />
+      <!-- Validation Error -->
+      @if (studentForm.get('name')?.invalid && studentForm.get('name')?.touched) {
+      <div>
+        Name is required.
+      </div>
+      }
+    </div>
+
+    <!-- National ID Input -->
+    <div class="mb-3">
+      <label for="nationalID" class="form-label">National ID</label>
+      <input (input)="nationalIdErrorMessage = ''" id="nationalID" formControlName="nationalID" type="text"
+        class="form-control" />
+      <!-- Validation Error -->
+      @if (studentForm.get('nationalID')?.invalid && studentForm.get('nationalID')?.touched) {
+      <div>
+        National ID must be 14 digits.
+      </div>
+      }
+      @if(nationalIdErrorMessage){
+      <div>
+        <span class="text-danger"> {{nationalIdErrorMessage}} </span>
+      </div>
+      }
+    </div>
+
+    <!-- Academic Year Input -->
+    <div class="form-group mb-3">
+      <label for="academicYear">Academic Year</label>
+      <select formControlName="academicYear" class="form-select" id="academicYear" name="academicYear">
+        <option value="1st Primary">1st Primary</option>
+        <option value="2nd Primary">2nd Primary</option>
+        <option value="3rd Primary">3rd Primary</option>
+        <option value="4th Primary">4th Primary</option>
+        <option value="5th Primary">5th Primary</option>
+        <option value="6th Primary">6th Primary</option>
+        <option value="1st Preparatory">1st Preparatory</option>
+        <option value="2nd Preparatory">2nd Preparatory</option>
+        <option value="3rd Preparatory">3rd Preparatory</option>
+        <option value="1st Secondary">1st Secondary</option>
+        <option value="2nd Secondary">2nd Secondary</option>
+        <option value="3rd Secondary">3rd Secondary</option>
+      </select>
+      @if (studentForm.get('academicYear')?.invalid && studentForm.get('academicYear')?.touched) {
+      <div>
+        Academic Year is required.
+      </div>
+      }
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-success" [disabled]="studentForm.invalid">Save</button>
+  </form>
+</div>

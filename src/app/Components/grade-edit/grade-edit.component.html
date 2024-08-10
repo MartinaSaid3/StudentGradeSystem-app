@@ -1,0 +1,36 @@
+<div>
+
+  <h1>Name: {{ studentName }}</h1>
+  <h1>Academic Year: {{ academicYear }}</h1>
+  <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()">
+    @if(gradeForm.controls['subject']){
+    <label for="subject">Subject</label>
+    <input id="subject" formControlName="subject" type="text" />
+    @if (gradeForm.get('subject')?.invalid && gradeForm.get('subject')?.touched) {
+    <div>
+      Subject is required.
+    </div>
+    }
+    }
+
+    <label for="term1">Term 1</label>
+    <input id="term1" formControlName="term1" type="number" />
+    @if (gradeForm.get('term1')?.invalid && gradeForm.get('term1')?.touched) {
+    <div>
+      Term 1 score must be between 0 and 100.
+    </div>
+    }
+
+
+    <label for="term2">Term 2</label>
+    <input id="term2" formControlName="term2" type="number" />
+    @if (gradeForm.get('term2')?.invalid && gradeForm.get('term2')?.touched) {
+    <div>
+      Term 2 score must be between 0 and 100.
+    </div>
+    }
+
+
+    <button type="submit" [disabled]="gradeForm.invalid">Save</button>
+  </form>
+</div>
